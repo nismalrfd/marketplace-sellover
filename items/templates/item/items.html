@@ -16,9 +16,12 @@
             <p class="font-semibold">Categories</p>
 
             <ul>
+                {% for category in categories %}
+
                     <li class="py-2 px-2 rounded-xl{% if category.id == category_id %} bg-gray-200{% endif %}">
-                        <a href="">{{ category.name }}</a>
+                        <a href="{% url 'items' %}?query={{ query }}&category={{ category.id }}">{{ category.name }}</a>
                     </li>
+                {% endfor %}
             </ul>
 
             <hr class="my-6">
@@ -26,7 +29,7 @@
             <p class="font-semibold">Clear filters</p>
 
             <ul>
-                <li><a href="" class="mt-2 py-4 px-8 inline-block bg-yellow-500 text-lg rounded-xl text-white">Clear</a>
+                <li><a href="{% url 'items' %}" class="mt-2 py-4 px-8 inline-block bg-yellow-500 text-lg rounded-xl text-white">Clear</a>
         </div>
 
         <div class="col-span-3">
