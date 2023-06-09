@@ -12,7 +12,6 @@
                 <div class="pr-6">
                     <img src="{{ conversation.item.image.url }}" class="w-20 rounded-xl">
                 </div>
-
                 <div>
                     {% for member in conversation.members.all %}
                         {% if member != request.user %}

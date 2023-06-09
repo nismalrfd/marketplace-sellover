@@ -3,6 +3,8 @@
 {% block title %}Conversation{% endblock %}
 
 {% block content %}
+<div class="w-1/2 my-6 mx-auto p-6 bg-100 rounded-xl">
+
 <h1 class="mb-6 text-3xl">Conversation</h1>
 
 <div class="space-y-6">
@@ -16,11 +18,12 @@
     {% endfor %}
 </div>
 
-<form method="post" action="." class="mt-6">
+<form method="post" action="" class="mt-6">
     {% csrf_token %}
 
     {{ form.as_p }}
 
-    <button class="py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Send</button>
+    <button class="py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white"type="submit" >Send</button>
 </form>
+</div>
 {% endblock %}

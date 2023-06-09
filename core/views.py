@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 
@@ -103,3 +103,7 @@ def registerPage(request):
             messages.warning(request, 'Something went wrong')
 
     return render(request, 'core/signup.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')
