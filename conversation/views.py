@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from conversation.forms import ConversationMessageForm
@@ -6,6 +7,7 @@ from items.models import Item
 
 
 # Create your views here.
+@login_required(login_url='/login')
 def message(request,pk):
     item = Item.objects.get(pk=pk)
 
@@ -73,6 +75,7 @@ def message(request,pk):
 #         'form': form
 #     })
 #
+@login_required(login_url='/login')
 def inbox(request):
     conversations = Conversation.objects.filter(members__in=[request.user.id])
 
@@ -80,6 +83,7 @@ def inbox(request):
         'conversations': conversations
     })
 
+@login_required(login_url='/login')
 def detail(request, pk):
     conversation = Conversation.objects.filter(members__in=[request.user.id]).get(pk=pk)
 

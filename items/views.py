@@ -6,6 +6,7 @@ from .forms import NewitemForm, EdititemForm
 
 
 # Create your views here.
+@login_required(login_url='/login')
 def items(request):
     query = request.GET.get('query','')
     category_id = request.GET.get('category',0)
@@ -37,7 +38,7 @@ def detail(request,pk):
     return render(request,'item/detail.html',context)
 
 
-@login_required()
+@login_required(login_url='/login')
 def new(request):
     if request.method == 'POST':
         form = NewitemForm(request.POST,request.FILES)
@@ -54,13 +55,13 @@ def new(request):
     }
     return render(request,'item/form.html',context)
 
-@login_required()
+@login_required(login_url='/login')
 def delete(request,pk):
     item = Item.objects.get(pk=pk,created_by=request.user)
     item.delete()
     return redirect('dashboard:index')
 
-@login_required()
+@login_required(login_url='/login')
 def edit(request,pk):
     item = Item.objects.get(pk=pk,created_by=request.user)
 
