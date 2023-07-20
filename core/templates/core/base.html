@@ -3,49 +3,66 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style> @media (max-width: 767px) {
-    /* Hide the desktop menu and show the mobile menu button */
-    #menu-links {
-        display: none;
-    }
-
-    /* Show the mobile menu on button click */
-    #mobile-menu-btn {
-        display: block;
-    }
-}
-</style>
-
         <script src="https://cdn.tailwindcss.com"></script>
 
-        <title>{% block title %}{% endblock %} | Sellover</title>
-    </head>
+  <style>
+    /* CSS for mobile view */
+    @media (max-width: 767px) {
+      /* Hiding the menu items initially in mobile view */
+      .menu-items {
+        display: none;
+      }
 
-    <body>
-<nav class="py-6 px-6 md:flex md:justify-between md:items-center border-b border-gray-200">
+      /* Show the menu items when the menu is clicked */
+      .menu-toggle:checked + .menu-items {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="py-6 px-6 md:flex md:justify-between md:items-center border-b border-gray-200">
     <a href="/" class="text-xl font-semibold">sellover</a>
 
-    <!-- Mobile menu button -->
-    <button class="md:hidden focus:outline-none" id="mobile-menu-btn">
-        <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-        </svg>
-    </button>
+    <!-- Mobile menu toggle button -->
+    <input type="checkbox" class="hidden md:hidden menu-toggle" id="menu-toggle">
 
-    <div class="hidden md:flex md:space-x-6" id="menu-links">
-        <a href="{% url 'new' %}" class="block md:inline text-lg font-semibold hover:text-gray-500">New item</a>
-        <a href="{% url 'items' %}" class="block md:inline text-lg font-semibold hover:text-gray-500">Browse</a>
-
-        {% if request.user.is_authenticated %}
-            <a href="{% url 'conversation:inbox' %}" class="block md:inline px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">inbox</a>
-            <a href="{% url 'logout' %}" class="block md:inline text-lg font-semibold hover:text-gray-500">Logout</a>
-            <a href="{% url 'dashboard:index' %}" class="block md:inline px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Dashboard</a>
-        {% else %}
-            <a href="{% url 'register' %}" class="block md:inline px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Sign up</a>
-            <a href="{% url 'login' %}" class="block md:inline px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Log in</a>
-        {% endif %}
+    <!-- Mobile menu items -->
+    <div class="menu-items md:hidden">
+      <a href="{% url 'new' %}" class="block md:inline text-lg font-semibold hover:text-gray-500">New item</a>
+      <a href="{% url 'items' %}" class="block md:inline text-lg font-semibold hover:text-gray-500">Browse</a>
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'conversation:inbox' %}" class="block md:inline text-lg font-semibold hover:text-gray-500">inbox</a>
+        <a href="{% url 'logout' %}" class="block md:inline text-lg font-semibold hover:text-gray-500">Logout</a>
+        <a href="{% url 'dashboard:index' %}" class="block md:inline text-lg font-semibold hover:text-gray-500">Dashboard</a>
+      {% else %}
+        <a href="{% url 'register' %}" class="block md:inline text-lg font-semibold hover:text-gray-500">Sign up</a>
+        <a href="{% url 'login' %}" class="block md:inline text-lg font-semibold hover:text-gray-500">Log in</a>
+      {% endif %}
     </div>
-</nav>
+
+    <!-- Mobile menu toggle button icon -->
+    <label for="menu-toggle" class="md:hidden block cursor-pointer">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+      </svg>
+    </label>
+
+    <!-- Desktop menu items -->
+    <div class="hidden md:flex space-x-6">
+      <a href="{% url 'new' %}" class="text-lg font-semibold hover:text-gray-500">New item</a>
+      <a href="{% url 'items' %}" class="text-lg font-semibold hover:text-gray-500">Browse</a>
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'conversation:inbox' %}" class="text-lg font-semibold hover:text-gray-500">inbox</a>
+        <a href="{% url 'logout' %}" class="text-lg font-semibold hover:text-gray-500">Logout</a>
+        <a href="{% url 'dashboard:index' %}" class="text-lg font-semibold hover:text-gray-500">Dashboard</a>
+      {% else %}
+        <a href="{% url 'register' %}" class="text-lg font-semibold hover:text-gray-500">Sign up</a>
+        <a href="{% url 'login' %}" class="text-lg font-semibold hover:text-gray-500">Log in</a>
+      {% endif %}
+    </div>
+  </nav>
+
 
 
         <div class="px-4 md:px-6 py-6">
