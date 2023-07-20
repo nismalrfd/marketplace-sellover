@@ -11,6 +11,9 @@
             <div class="p-6 flex bg-gray-100 rounded-xl">
                 <div class="pr-6">
                     <img src="{{ conversation.item.image.url }}" class="w-20 rounded-xl">
+
+                    <!-- Add a margin on mobile for spacing -->
+                    <div class="md:hidden mt-2"></div>
                 </div>
                 <div>
                     {% for member in conversation.members.all %}
