@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'dashboard',
     'items',
     'conversation',
+    'adminpanel',
 ]
 
 MIDDLEWARE = [
