@@ -6,22 +6,24 @@
 <div class="w-full md:w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
     <h1 class="mb-6 text-3xl text-center">Sign up</h1>
 
-    <form method="POST" action="">
+    <form method="POST" onsubmit="return validatePassword();" >
         {% csrf_token %}
 
         <div class="mb-3">
             <label class="inline-block mb-2">Username</label><br>
-            <input required class="w-full py-4 px-6 rounded-xl" type="text" name="username" placeholder="Enter your name..">
+            <input  required class="w-full py-4 px-6 rounded-xl" type="text" name="username" placeholder="Enter your name..">
         </div>
 
         <div class="mb-3">
             <label class="inline-block mb-2">Password</label><br>
-            <input required class="w-full py-4 px-6 rounded-xl" type="password" name="password" placeholder="Enter your password...">
+            <input id="password"  required class="w-full py-4 px-6 rounded-xl" type="password" name="password" placeholder="Enter your password...">
         </div>
 
         <div class="mb-3">
             <label class="inline-block mb-2">Confirm Password</label><br>
-            <input required class="w-full py-4 px-6 rounded-xl" type="password" name="confirm_password" placeholder="Confirm your password...">
+            <input id="confirmPassword" required class="w-full py-4 px-6 rounded-xl" type="password" name="confirm_password" placeholder="Confirm your password...">
+                    <p id="passwordStrength" style="color: red;"></p>
+
         </div>
 
         {% if messages %}
@@ -37,4 +39,7 @@
         <button class="py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white w-full" type="submit">Submit</button>
     </form>
 </div>
+
 {% endblock %}
+
+

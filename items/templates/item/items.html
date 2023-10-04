@@ -5,8 +5,8 @@
 {% block content %}
     <div class="pb-6 grid grid-cols-1 md:grid-cols-4 gap-4 bg-gray-100">
         <div class="md:col-span-1">
-            <form method="get" action="{% url 'items' %}">
-                <input name="query" class="w-full py-4 px-6 border rounded-xl" type="text" value="{{ query }}" placeholder="Find a bike, a chair or car...">
+            <form method="get" action="{% url 'items' %}" id = "search-form" autocomplete="off">
+                <input name="query" class="w-full py-4 px-6 border rounded-xl"  id = "search-input" type="text" value="{{ query }}" placeholder="Find a bike, a chair or car...">
 
                 <button class="mt-2 py-4 px-8 text-lg bg-teal-500 text-white rounded-xl" type="submit">Search</button>
             </form>
@@ -47,8 +47,14 @@
                             </div>
                         </a>
                     </div>
+                {% empty %}
+                <div>
+                      <h3>no result found....!</h3>
+                </div>
+
                 {% endfor %}
             </div>
         </div>
     </div>
+
 {% endblock %}

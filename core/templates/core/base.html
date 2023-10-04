@@ -5,6 +5,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://cdn.tailwindcss.com"></script>
 
+        <script>
+            <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+            var passwordStrength = document.getElementById("passwordStrength");
+
+            // Check if the password meets certain criteria (e.g., length, complexity)
+            if (password.length < 8) {
+                passwordStrength.innerHTML = "Password must be at least 8 characters long.";
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                passwordStrength.innerHTML = "Passwords do not match.";
+                return false;
+            }
+
+            // Password is valid
+            passwordStrength.innerHTML = "Password is valid!";
+            return true;
+        }
+    </script>
+</script>
+
+
   <style>
     /* CSS for mobile view */
     @media (max-width: 767px) {
