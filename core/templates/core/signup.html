@@ -6,7 +6,7 @@
 <div class="w-full md:w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
     <h1 class="mb-6 text-3xl text-center">Sign up</h1>
 
-    <form method="POST" onsubmit="return validatePassword();" >
+    <form method="POST"  id="password-form" >
         {% csrf_token %}
 
         <div class="mb-3">
@@ -21,8 +21,10 @@
 
         <div class="mb-3">
             <label class="inline-block mb-2">Confirm Password</label><br>
-            <input id="confirmPassword" required class="w-full py-4 px-6 rounded-xl" type="password" name="confirm_password" placeholder="Confirm your password...">
-                    <p id="passwordStrength" style="color: red;"></p>
+            <input  id="confirm-password" required class="w-full py-4 px-6 rounded-xl" type="password" name="confirm_password" placeholder="Confirm your password...">
+            <div id="password-strength"></div>
+            <div id="password-match"></div>
+
 
         </div>
 

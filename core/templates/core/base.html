@@ -4,31 +4,64 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://cdn.tailwindcss.com"></script>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+$(document).ready(function () {
+    $('#password').on('input', function () {
+        var password = $(this).val();
+        var strength = checkPasswordStrength(password);
+        displayStrength(strength);
+    });
 
-        <script>
-            <script>
-        function validatePassword() {
-            var password = document.getElementById("password").value;
-            var confirmPassword = document.getElementById("confirmPassword").value;
-            var passwordStrength = document.getElementById("passwordStrength");
+    $('#confirm-password').on('input', function () {
+        checkPasswordMatch();
+    });
 
-            // Check if the password meets certain criteria (e.g., length, complexity)
-            if (password.length < 8) {
-                passwordStrength.innerHTML = "Password must be at least 8 characters long.";
-                return false;
-            }
-
-            if (password !== confirmPassword) {
-                passwordStrength.innerHTML = "Passwords do not match.";
-                return false;
-            }
-
-            // Password is valid
-            passwordStrength.innerHTML = "Password is valid!";
-            return true;
+    function checkPasswordStrength(password) {
+        // You can implement your own password strength checking logic here.
+        // For simplicity, we'll just check the length of the password.
+        if (password.length < 8) {
+            return 'Weak';
+        } else if (password.length < 12) {
+            return 'Moderate';
+        } else {
+            return 'Strong';
         }
-    </script>
+    }
+
+    function displayStrength(strength) {
+        var strengthDiv = $('#password-strength');
+        strengthDiv.text('Password Strength: ' + strength);
+
+        // You can also apply different styles based on the strength.
+        if (strength === 'Weak') {
+            strengthDiv.css('color', 'red');
+        } else if (strength === 'Moderate') {
+            strengthDiv.css('color', 'orange');
+        } else {
+            strengthDiv.css('color', 'green');
+        }
+    }
+
+    function checkPasswordMatch() {
+        var password = $('#password').val();
+        var confirmPassword = $('#confirm-password').val();
+        var matchDiv = $('#password-match');
+
+        if (password === confirmPassword) {
+            matchDiv.text('');
+            matchDiv.css('color', 'green');
+        } else {
+            matchDiv.text('Passwords Do Not Match');
+            matchDiv.css('color', 'red');
+        }
+    }
+});
+
 </script>
+
+
+
 
 
   <style>
