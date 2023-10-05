@@ -16,12 +16,12 @@
 
         <div class="mb-3">
             <label class="inline-block mb-2">Password</label><br>
-            <input required class="w-full py-4 px-6 rounded-xl" type="password" name="password" placeholder="Enter your password...">
+            <input required id="password" class="w-full py-4 px-6 rounded-xl" type="password" name="password" placeholder="Enter your password...">
         </div>
 
         <div class="mb-3">
             <label class="inline-block mb-2">Confirm Password</label><br>
-            <input required class="w-full py-4 px-6 rounded-xl" type="password" name="confirm_password" placeholder="Confirm your password...">
+            <input required  id="confirm_password" class="w-full py-4 px-6 rounded-xl " type="password" name="confirm_password" placeholder="Confirm your password...">
         </div>
 
         {% if messages %}
@@ -34,7 +34,34 @@
             </div>
         {% endif %}
 
-        <button class="py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white w-full" type="submit">Submit</button>
+        <button id="submitBtn" disabled class="py-4 px-8 text-lg bg-sky-500 hover:bg-sky-700 rounded-xl text-white w-full" type="submit">Submit</button>
     </form>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Function to check if passwords match
+    function passwordsMatch() {
+        var password = $("input[name='password']").val();
+        var confirmPassword = $("input[name='confirm_password']").val();
+        return password === confirmPassword;
+    }
+
+    // Function to enable/disable the submit button based on password validation and change button color
+    function validatePassword() {
+        if (passwordsMatch()) {
+            $('#submitBtn').prop('disabled', false);
+            $('#submitBtn').removeClass('bg-gray-400').addClass('bg-sky-500');
+        } else {
+            $('#submitBtn').prop('disabled', true);
+            $('#submitBtn').removeClass('bg-sky-500 hover:bg-sky-700').addClass('bg-gray-400');
+        }
+    }
+    // Listen for input changes in the password and confirm password fields
+    $("input[name='password'], input[name='confirm_password']").on('input', validatePassword);
+
+    // Initial validation
+    validatePassword();
+});
+</script>
 {% endblock %}

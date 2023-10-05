@@ -15,8 +15,14 @@
         </div>
 
         <div class="mb-3">
-            <label class="inline-block mb-2">Password</label><br>
-            <input class="w-full py-4 px-6 rounded-xl" type="password" name="password" placeholder="Enter your password..." required>
+                        <label class="inline-block mb-2">Password</label><br>
+
+        <div class="relative">
+
+                <input id="password" class="w-full py-4 px-6 rounded-xl js-password" type="password" name="password" placeholder="Enter your password..." required>
+                <input class="hidden js-password-toggle" id="toggle" type="checkbox" />
+                <label class="bg-sky-500 hover:bg-sky-700 rounded px-2 py-1 text-sm text-text-white font-mono cursor-pointer absolute top-1/2 transform -translate-y-1/2 right-4 js-password-label" for="toggle">show</label>
+            </div>
         </div>
 
         {% if messages %}
@@ -29,7 +35,26 @@
             </div>
         {% endif %}
 
-        <button class="py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white w-full" type="submit">Submit</button>
+        <button class="py-4 px-8 text-lg bg-sky-500 hover:bg-sky-700 rounded-xl text-white w-full" type="submit">Submit</button>
     </form>
 </div>
+<script>
+    const passwordToggle = document.querySelector('.js-password-toggle')
+
+passwordToggle.addEventListener('change', function() {
+  const password = document.querySelector('.js-password'),
+    passwordLabel = document.querySelector('.js-password-label')
+
+  if (password.type === 'password') {
+    password.type = 'text'
+    passwordLabel.innerHTML = 'hide'
+  } else {
+    password.type = 'password'
+    passwordLabel.innerHTML = 'show'
+  }
+
+  password.focus()
+})
+
+</script>
 {% endblock %}
