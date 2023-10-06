@@ -6,22 +6,34 @@
 <div class="w-full md:w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
     <h1 class="mb-6 text-3xl text-center">Sign up</h1>
 
-    <form method="POST" action="">
+    <form method="POST"  id="password-form" >
         {% csrf_token %}
 
         <div class="mb-3">
             <label class="inline-block mb-2">Username</label><br>
-            <input required class="w-full py-4 px-6 rounded-xl" type="text" name="username" placeholder="Enter your name..">
+            <input  required class="w-full py-4 px-6 rounded-xl" type="text" name="username" placeholder="Enter your name..">
         </div>
 
         <div class="mb-3">
             <label class="inline-block mb-2">Password</label><br>
+<<<<<<< HEAD
             <input required id="password" class="w-full py-4 px-6 rounded-xl" type="password" name="password" placeholder="Enter your password...">
+=======
+            <input id="password"  required class="w-full py-4 px-6 rounded-xl" type="password" name="password" placeholder="Enter your password...">
+>>>>>>> d0fca5aad3252900afb15cbd62961c07bc3e4b47
         </div>
 
         <div class="mb-3">
             <label class="inline-block mb-2">Confirm Password</label><br>
+<<<<<<< HEAD
             <input required  id="confirm_password" class="w-full py-4 px-6 rounded-xl " type="password" name="confirm_password" placeholder="Confirm your password...">
+=======
+            <input  id="confirm-password" required class="w-full py-4 px-6 rounded-xl" type="password" name="confirm_password" placeholder="Confirm your password...">
+            <div id="password-strength"></div>
+            <div id="password-match"></div>
+
+
+>>>>>>> d0fca5aad3252900afb15cbd62961c07bc3e4b47
         </div>
 
         {% if messages %}
@@ -37,6 +49,7 @@
         <button id="submitBtn" disabled class="py-4 px-8 text-lg bg-sky-500 hover:bg-sky-700 rounded-xl text-white w-full" type="submit">Submit</button>
     </form>
 </div>
+<<<<<<< HEAD
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -64,4 +77,9 @@ $(document).ready(function() {
     validatePassword();
 });
 </script>
+=======
+
+>>>>>>> d0fca5aad3252900afb15cbd62961c07bc3e4b47
 {% endblock %}
+
+
