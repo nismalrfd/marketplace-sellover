@@ -11,7 +11,7 @@
                 <div>
                     <a href="{% url 'detail' item.id %}">
                         <div>
-                            <img src="/media/items_images/{{ item.image }}" class="rounded-t-xl" style="width: 100%; height: 300px;">
+                            <img src="{{ item.image.url }}" class="rounded-t-xl" style="width: 100%; height: 300px;">
                         </div>
 
                         <div class="p-6 bg-white rounded-b-xl">

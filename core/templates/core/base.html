@@ -81,22 +81,22 @@ $(document).ready(function () {
 </head>
 <body>
   <nav class="py-6 px-6 md:flex md:justify-between md:items-center border-b border-gray-200">
-    <a href="/" class="text-xl font-semibold">sellover</a>
+    <a href="/" class="text-xl font-semibold hover:text-sky-500">sellover</a>
 
     <!-- Mobile menu toggle button -->
     <input type="checkbox" class="hidden md:hidden menu-toggle" id="menu-toggle">
 
     <!-- Mobile menu items -->
     <div class="menu-items md:hidden">
-      <a href="{% url 'new' %}" class="block md:inline text-lg font-semibold hover:text-gray-500">New item</a>
-      <a href="{% url 'items' %}" class="block md:inline text-lg font-semibold hover:text-gray-500">Browse</a>
+      <a href="{% url 'new' %}" class="block md:inline text-lg font-semibold hover:text-skygra-500">New item</a>
+      <a href="{% url 'items' %}" class="block md:inline text-lg font-semibold hover:text-sky-500">Browse</a>
       {% if request.user.is_authenticated %}
-        <a href="{% url 'conversation:inbox' %}" class="block md:inline text-lg font-semibold hover:text-gray-500">inbox</a>
-        <a href="{% url 'logout' %}" class="block md:inline text-lg font-semibold hover:text-gray-500">Logout</a>
-        <a href="{% url 'dashboard:index' %}" class="block md:inline text-lg font-semibold hover:text-gray-500">Dashboard</a>
+        <a href="{% url 'conversation:inbox' %}" class="block md:inline text-lg font-semibold hover:text-sky-500">inbox</a>
+        <a href="{% url 'logout' %}" class="block md:inline text-lg font-semibold hover:text-sky-500">Logout</a>
+        <a href="{% url 'dashboard:index' %}" class="block md:inline text-lg font-semibold hover:text-sky-500">Dashboard</a>
       {% else %}
-        <a href="{% url 'register' %}" class="block md:inline text-lg font-semibold hover:text-gray-500">Sign up</a>
-        <a href="{% url 'login' %}" class="block md:inline text-lg font-semibold hover:text-gray-500">Log in</a>
+        <a href="{% url 'register' %}" class="block md:inline text-lg font-semibold hover:text-sky-500">Sign up</a>
+        <a href="{% url 'login' %}" class="block md:inline text-lg font-semibold hover:text-sky-500">Log in</a>
       {% endif %}
     </div>
 
@@ -109,15 +109,15 @@ $(document).ready(function () {
 
     <!-- Desktop menu items -->
     <div class="hidden md:flex space-x-6">
-      <a href="{% url 'new' %}" class="text-lg font-semibold hover:text-gray-500">New item</a>
-      <a href="{% url 'items' %}" class="text-lg font-semibold hover:text-gray-500">Browse</a>
+      <a href="{% url 'new' %}" class="text-lg font-semibold hover:text-sky-500">New item</a>
+      <a href="{% url 'items' %}" class="text-lg font-semibold hover:text-sky-500">Browse</a>
       {% if request.user.is_authenticated %}
-        <a href="{% url 'conversation:inbox' %}" class="text-lg font-semibold hover:text-gray-500">inbox</a>
-        <a href="{% url 'logout' %}" class="text-lg font-semibold hover:text-gray-500">Logout</a>
-        <a href="{% url 'dashboard:index' %}" class="text-lg font-semibold hover:text-gray-500">Dashboard</a>
+        <a href="{% url 'conversation:inbox' %}" class="text-lg font-semibold hover:text-sky-500">inbox</a>
+        <a href="{% url 'logout' %}" class="text-lg font-semibold hover:text-sky-500">Logout</a>
+        <a href="{% url 'dashboard:index' %}" class="text-lg font-semibold hover:text-sky-500">Dashboard</a>
       {% else %}
-        <a href="{% url 'register' %}" class="text-lg font-semibold hover:text-gray-500">Sign up</a>
-        <a href="{% url 'login' %}" class="text-lg font-semibold hover:text-gray-500">Log in</a>
+        <a href="{% url 'register' %}" class="text-lg font-semibold hover:text-sky-500">Sign up</a>
+        <a href="{% url 'login' %}" class="text-lg font-semibold hover:text-sky-500">Log in</a>
       {% endif %}
     </div>
   </nav>
@@ -138,10 +138,10 @@ $(document).ready(function () {
             <div class="w-full md:w-1/3">
                 <h3 class="mb-5 font-semibold text-gray-400">Menu</h3>
                 <ul class="space-y-2">
-                    <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">About</a></li>
-                    <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">Contact</a></li>
-                    <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">Privacy policy</a></li>
-                    <li><a href="#" class="text-lg text-teal-500 hover:text-teal-700">Term of use</a></li>
+                    <li><a href="#" class="text-lg text-sky-500 hover:text-sky-700">About</a></li>
+                    <li><a href="#" class="text-lg text-sky-500 hover:text-sky-700">Contact</a></li>
+                    <li><a href="#" class="text-lg text-sky-500 hover:text-sky-700">Privacy policy</a></li>
+                    <li><a href="#" class="text-lg text-sky-500 hover:text-sky-700">Term of use</a></li>
                 </ul>
             </div>
         </footer>
