@@ -6,34 +6,27 @@
 <div class="w-full md:w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
     <h1 class="mb-6 text-3xl text-center">Sign up</h1>
 
-    <form method="POST"  id="password-form" >
+    <form method="POST"  id="check-user-form" >
         {% csrf_token %}
 
         <div class="mb-3">
             <label class="inline-block mb-2">Username</label><br>
-            <input  required class="w-full py-4 px-6 rounded-xl" type="text" name="username" placeholder="Enter your name..">
+            <input  id="username" required class="w-full py-4 px-6 rounded-xl" type="text" name="username" placeholder="Enter your name..">
+            <div id="username-availability"></div>
+
         </div>
 
         <div class="mb-3">
             <label class="inline-block mb-2">Password</label><br>
-<<<<<<< HEAD
             <input required id="password" class="w-full py-4 px-6 rounded-xl" type="password" name="password" placeholder="Enter your password...">
-=======
-            <input id="password"  required class="w-full py-4 px-6 rounded-xl" type="password" name="password" placeholder="Enter your password...">
->>>>>>> d0fca5aad3252900afb15cbd62961c07bc3e4b47
         </div>
 
         <div class="mb-3">
             <label class="inline-block mb-2">Confirm Password</label><br>
-<<<<<<< HEAD
             <input required  id="confirm_password" class="w-full py-4 px-6 rounded-xl " type="password" name="confirm_password" placeholder="Confirm your password...">
-=======
-            <input  id="confirm-password" required class="w-full py-4 px-6 rounded-xl" type="password" name="confirm_password" placeholder="Confirm your password...">
             <div id="password-strength"></div>
             <div id="password-match"></div>
 
-
->>>>>>> d0fca5aad3252900afb15cbd62961c07bc3e4b47
         </div>
 
         {% if messages %}
@@ -49,7 +42,6 @@
         <button id="submitBtn" disabled class="py-4 px-8 text-lg bg-sky-500 hover:bg-sky-700 rounded-xl text-white w-full" type="submit">Submit</button>
     </form>
 </div>
-<<<<<<< HEAD
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -65,21 +57,92 @@ $(document).ready(function() {
         if (passwordsMatch()) {
             $('#submitBtn').prop('disabled', false);
             $('#submitBtn').removeClass('bg-gray-400').addClass('bg-sky-500');
+            $("input[name='password'], input[name='confirm_password']").removeClass('error-border'); // Remove error class
         } else {
             $('#submitBtn').prop('disabled', true);
             $('#submitBtn').removeClass('bg-sky-500 hover:bg-sky-700').addClass('bg-gray-400');
+            $("input[name='password'], input[name='confirm_password']").addClass('error-border'); // Add error class
         }
     }
+
     // Listen for input changes in the password and confirm password fields
     $("input[name='password'], input[name='confirm_password']").on('input', validatePassword);
 
     // Initial validation
     validatePassword();
 });
-</script>
-=======
 
->>>>>>> d0fca5aad3252900afb15cbd62961c07bc3e4b47
+$(document).ready(function() {
+    $('#username').on('keyup', function() {
+        var username = $(this).val();
+
+        $.ajax({
+            url: '/check_username_availability/', // Replace with your Django view URL
+            type: 'GET',
+            data: { username: username },
+            success: function(data) {
+                if (data.is_taken) {
+                    $('#username-availability').text('Username is already exist..').css('color', 'red');
+                    $('#username').addClass('error-border'); // Add error class to the username input
+                } else {
+                    $('#username-availability').text('');
+                    $('#username').removeClass('error-border'); // Remove error class from the username input
+                }
+            }
+        });
+    });
+});
+
+
+
+
+
+<!--$(document).ready(function() {-->
+<!--    // Function to check if passwords match-->
+<!--    function passwordsMatch() {-->
+<!--        var password = $("input[name='password']").val();-->
+<!--        var confirmPassword = $("input[name='confirm_password']").val();-->
+<!--        return password === confirmPassword;-->
+<!--    }-->
+
+<!--    // Function to enable/disable the submit button based on password validation and change button color-->
+<!--    function validatePassword() {-->
+<!--        if (passwordsMatch()) {-->
+<!--            $('#submitBtn').prop('disabled', false);-->
+<!--            $('#submitBtn').removeClass('bg-gray-400').addClass('bg-sky-500');-->
+<!--        } else {-->
+<!--            $('#submitBtn').prop('disabled', true);-->
+<!--            $('#submitBtn').removeClass('bg-sky-500 hover:bg-sky-700').addClass('bg-gray-400');-->
+<!--        }-->
+<!--    }-->
+<!--    // Listen for input changes in the password and confirm password fields-->
+<!--    $("input[name='password'], input[name='confirm_password']").on('input', validatePassword);-->
+
+<!--    // Initial validation-->
+<!--    validatePassword();-->
+<!--});-->
+
+
+<!--  $(document).ready(function() {-->
+<!--  $('#username').on('keyup', function() {-->
+<!--    var username = $(this).val();-->
+
+<!--    $.ajax({-->
+<!--      url: '/check_username_availability/', // Replace with your Django view URL-->
+<!--      type: 'GET',-->
+<!--      data: { username: username },-->
+<!--      success: function(data) {-->
+<!--        if (data.is_taken) {-->
+<!--          $('#username-availability').text('Username is already exist..').css('color', 'red');-->
+<!--        } else {-->
+<!--          $('#username-availability').text('');-->
+<!--        }-->
+<!--      }-->
+<!--    });-->
+<!--  });-->
+<!--});-->
+</script>
+
 {% endblock %}
 
 
