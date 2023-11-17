@@ -95,7 +95,7 @@ $(document).ready(function () {
         <a href="{% url 'logout' %}" class="block md:inline text-lg font-semibold hover:text-sky-500">Logout</a>
         <a href="{% url 'dashboard:index' %}" class="block md:inline text-lg font-semibold hover:text-sky-500">Dashboard</a>
       {% else %}
-        <a href="{% url 'register' %}" class="block md:inline text-lg font-semibold hover:text-sky-500">Sign up</a>
+        <a href="{% url 'register_view' %}" class="block md:inline text-lg font-semibold hover:text-sky-500">Sign up</a>
         <a href="{% url 'login' %}" class="block md:inline text-lg font-semibold hover:text-sky-500">Log in</a>
       {% endif %}
     </div>
@@ -116,7 +116,7 @@ $(document).ready(function () {
         <a href="{% url 'logout' %}" class="text-lg font-semibold hover:text-sky-500">Logout</a>
         <a href="{% url 'dashboard:index' %}" class="text-lg font-semibold hover:text-sky-500">Dashboard</a>
       {% else %}
-        <a href="{% url 'register' %}" class="text-lg font-semibold hover:text-sky-500">Sign up</a>
+        <a href="{% url 'register_view' %}" class="text-lg font-semibold hover:text-sky-500">Sign up</a>
         <a href="{% url 'login' %}" class="text-lg font-semibold hover:text-sky-500">Log in</a>
       {% endif %}
     </div>

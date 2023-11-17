@@ -10,15 +10,17 @@ from items.models import *
 def index(request):
     items = Item.objects.filter(is_sold=False)[0:6]
     categories = Category.objects.all()
-    context={
-        'categories':categories,
-        'items':items
+    context = {
+        'categories': categories,
+        'items': items
 
     }
-    return render(request,'core/index.html',context)
+    return render(request, 'core/index.html', context)
+
 
 def contact(request):
-    return render(request,'core/contact.html')
+    return render(request, 'core/contact.html')
+
 
 #
 # def registerPage(request):
@@ -33,7 +35,7 @@ def contact(request):
 #         'form':form
 #
 #     }
-#     return render(request,'core/signup.html',context)
+#     return render(request,'core/signupPage.html',context)
 #
 #
 # def loginPage(request):
@@ -41,7 +43,6 @@ def contact(request):
 #
 #     }
 #     return render(request, 'core/login.html', context)
-
 
 
 def loginPage(request):
@@ -74,13 +75,13 @@ def loginPage(request):
     return render(request, 'core/login.html')
 
 
-def registerPage(request):
+
+def register_view(request):
     if request.method == 'POST':
         try:
             username = request.POST.get('username')
             password = request.POST.get('password')
             confirm_password = request.POST.get('confirm_password')
-
 
             user_obj = User.objects.filter(username=username)
             if user_obj.exists():
@@ -96,13 +97,22 @@ def registerPage(request):
 
             # Profile.objects.create(user= user_obj,token = genarate_random_string(20))
 
-
             messages.success(request, 'Account created')
             return redirect('login')
         except Exception as e:
             messages.warning(request, 'Something went wrong')
 
-    return render(request, 'core/signup.html')
+
+    return render(request, 'core/signupPage.html')
+from django.http import JsonResponse
+from django.contrib.auth.models import User
+
+def check_username_availability(request):
+    username = request.GET.get('username', None)
+    if username is not None:
+        is_available = not User.objects.filter(username=username).exists()
+        return JsonResponse({'available': is_available})
+    return JsonResponse({'available': False})
 
 def logout_view(request):
     logout(request)
