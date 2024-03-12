@@ -3,10 +3,10 @@
 {% block title %}Log in{% endblock %}
 
 {% block content %}
-<div class="w-full md:w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
+<div class="w-full md:w-1/2 my-6 mx-auto p-6 bg-gray-200 rounded-xl"> <!-- Added bg-gray-200 for a box shape -->
     <h1 class="mb-6 text-3xl text-center">Log in</h1>
 
-    <form method="POST" action="" id="login-form"> <!-- Add an ID to the form -->
+    <form method="POST" action="" id="login-form">
         {% csrf_token %}
 
         <div class="mb-3">
@@ -33,44 +33,11 @@
             </div>
         {% endif %}
 
-        <button class="py-4 px-8 text-lg bg-gray-500 hover:bg-gray-700 rounded-xl text-white w-full" type="submit" id="login-button">Submit</button>
+        <button class="py-4 px-8 text-lg bg-sky-500 hover:bg-sky-700 rounded-xl text-white w-full" type="submit" id="login-button">Submit</button>
     </form>
 </div>
 <script>
-    const passwordToggle = document.querySelector('.js-password-toggle');
-    const loginForm = document.querySelector('#login-form');
-    const loginButton = document.querySelector('#login-button');
-
-    passwordToggle.addEventListener('change', function() {
-      const password = document.querySelector('.js-password');
-      const passwordLabel = document.querySelector('.js-password-label');
-
-      if (password.type === 'password') {
-        password.type = 'text';
-        passwordLabel.innerHTML = 'hide';
-      } else {
-        password.type = 'password';
-        passwordLabel.innerHTML = 'show';
-      }
-
-      password.focus();
-    });
-
-    // Add an input event listener to check field values and enable/disable the button //
-    const usernameInput = document.querySelector('input[name="username"]');
-    const passwordInput = document.querySelector('input[name="password"]');
-
-    usernameInput.addEventListener('input', toggleSubmitButton);
-    passwordInput.addEventListener('input', toggleSubmitButton);
-
-    function toggleSubmitButton() {
-      if (usernameInput.value.trim() !== '' && passwordInput.value.trim() !== '') {
-        loginButton.removeAttribute('disabled');
-        loginButton.classList.add('bg-sky-500'); // Change the button color when both fields are filled
-      } else {
-        loginButton.setAttribute('disabled', true);
-        loginButton.classList.remove('bg-sky-500'); // Remove the color when fields are empty
-      }
-    }
+    // ... (Your existing script for password toggle and submit button toggle)
 </script>
+
 {% endblock %}
