@@ -9,6 +9,17 @@
     <form method="POST" action="" id="login-form">
         {% csrf_token %}
 
+        {% if messages %}
+        <div class="mb-3 p-6 rounded-xl text-red-500 text-center" role="alert">
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        {% endif %}
+
         <div class="mb-3">
             <label class="inline-block mb-2">Username</label><br>
             <input class="w-full py-4 px-6 rounded-xl" type="text" name="username" placeholder="Enter your name.." required>
@@ -22,16 +33,6 @@
                 <label class="bg-sky-500 hover:bg-sky-700 rounded px-2 py-1 text-sm text-text-white font-mono cursor-pointer absolute top-1/2 transform -translate-y-1/2 right-4 js-password-label" for="toggle">show</label>
             </div>
         </div>
-
-        {% if messages %}
-            <div class="mb-3 p-6 bg-red-100 rounded-xl" role="alert">
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
 
         <button class="py-4 px-8 text-lg bg-sky-500 hover:bg-sky-700 rounded-xl text-white w-full" type="submit" id="login-button">Submit</button>
     </form>

@@ -8,6 +8,16 @@
 
     <form method="POST"  id="check-user-form" >
         {% csrf_token %}
+        {% if messages %}
+        <div class="mb-3 p-6 rounded-xl text-red-500 text-center" role="alert">
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        {% endif %}
 
         <div class="mb-3">
             <label class="inline-block mb-2">Username</label><br>
@@ -28,16 +38,6 @@
             <div id="password-match"></div>
 
         </div>
-
-        {% if messages %}
-            <div class="mb-3 p-6 bg-red-100 rounded-xl" role="alert">
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
 
         <button id="submitBtn" disabled class="py-4 px-8 text-lg bg-sky-500 hover:bg-sky-700 rounded-xl text-white w-full" type="submit">Submit</button>
     </form>
