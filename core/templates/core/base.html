@@ -6,6 +6,20 @@
         <script src="https://cdn.tailwindcss.com"></script>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+      $(document).ready(function() {
+        // Password show/hide functionality
+        $('.js-password-label').click(function() {
+            var passwordField = $('#password');
+            var toggleCheckbox = $('#toggle');
+            
+            if (passwordField.attr('type') === 'password') {
+                passwordField.attr('type', 'text');
+            } else {
+                passwordField.attr('type', 'password');
+            }
+        });
+    });
+    
 $(document).ready(function () {
     $('#password').on('input', function () {
         var password = $(this).val();
