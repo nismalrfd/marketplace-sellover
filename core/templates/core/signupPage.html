@@ -3,100 +3,124 @@
 {% block title %}Sign up{% endblock %}
 
 {% block content %}
-<div class="w-full md:w-1/2 my-6 mx-auto p-6 bg-gray-200 rounded-xl"> 
-    <h1 class="mb-6 text-3xl text-center">Sign up</h1>
-
-    <form method="POST"  id="check-user-form" >
-        {% csrf_token %}
-        {% if messages %}
-        <div class="mb-3 p-6 rounded-xl text-red-500 text-center" role="alert">
-            <ul class="messages">
-                {% for message in messages %}
-                <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        </div>
+<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+    <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center"> <!-- Added text-center class -->
+                Sign in to your account
+            </h1>
+            <form class="space-y-4 md:space-y-6"id="check-user-form" method='post'>
+                {% csrf_token %}
         
-        {% endif %}
+                {% if messages %}
+                <div class="mb-3 p-6 rounded-xl text-red-500 text-center" role="alert">
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+                
+                {% endif %}
+                <div>
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                    <input id="username" required type="text" name="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
+                    <div id="usernameValidationMessage"></div>
 
-        <div class="mb-3">
-            <label class="inline-block mb-2">Username</label><br>
-            <input  id="username" required class="w-full py-4 px-6 rounded-xl" type="text" name="username" placeholder="Enter your name..">
-            <div id="usernameValidationMessage"></div>
-
+                </div>
+                <div>
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                    <div class="relative">
+                        <input type="password" required id="password" name="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                        <span class="absolute inset-y-0 right-0 flex items-center pr-3 text-sm font-medium text-gray-400 dark:text-gray-300 cursor-pointer" onclick="togglePasswordVisibility('password')">
+                            Show
+                        </span>
+                    </div>
+                </div>
+                <div>
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm Password</label>
+                    <div class="relative">
+                        <input required  id="confirm_password"  type="password" name="confirm_password" placeholder="Confirm your password..." class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                        <span class="absolute inset-y-0 right-0 flex items-center pr-3 text-sm font-medium text-gray-400 dark:text-gray-300 cursor-pointer" onclick="togglePasswordVisibility('confirm_password')">
+                            Show
+                        </span>
+                        <div id="password-strength"></div>
+                        <div id="password-match"></div>
+                    </div>
+                </div>
+                <button disabled type="submit" class="w-full text-white bg-sky-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+                <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                    Don’t have an account yet? <a href="{% url 'login' %}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Log in</a>
+                </p>
+            </form>
         </div>
-
-        <div class="mb-3">
-            <label class="inline-block mb-2">Password</label><br>
-            <input required id="password" class="w-full py-4 px-6 rounded-xl" type="password" name="password" placeholder="Enter your password...">
-        </div>
-
-        <div class="mb-3">
-            <label class="inline-block mb-2">Confirm Password</label><br>
-            <input required  id="confirm_password" class="w-full py-4 px-6 rounded-xl " type="password" name="confirm_password" placeholder="Confirm your password...">
-            <div id="password-strength"></div>
-            <div id="password-match"></div>
-
-        </div>
-
-        <button id="submitBtn" disabled class="py-4 px-8 text-lg bg-sky-500 hover:bg-sky-700 rounded-xl text-white w-full" type="submit">Submit</button>
-    </form>
+    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() {
-    // Function to check if passwords match
-    function passwordsMatch() {
-        var password = $("input[name='password']").val();
-        var confirmPassword = $("input[name='confirm_password']").val();
-        return password === confirmPassword;
+    // Function to toggle password visibility
+    function togglePasswordVisibility(inputId) {
+        const input = $('#' + inputId);
+        const type = input.attr('type') === 'password' ? 'text' : 'password';
+        input.attr('type', type);
     }
 
-    // Function to enable/disable the submit button based on password validation and change button color
-    function validatePassword() {
-        if (passwordsMatch()) {
-            $('#submitBtn').prop('disabled', false);
-            $('#submitBtn').removeClass('bg-gray-400').addClass('bg-sky-500');
-            $("input[name='password'], input[name='confirm_password']").removeClass('error-border'); // Remove error class
-        } else {
-            $('#submitBtn').prop('disabled', true);
-            $('#submitBtn').removeClass('bg-sky-500 hover:bg-sky-700').addClass('bg-gray-400');
-            $("input[name='password'], input[name='confirm_password']").addClass('error-border'); // Add error class
+    $(document).ready(function() {
+        // Function to check if passwords match
+        function passwordsMatch() {
+            var password = $("input[name='password']").val();
+            var confirmPassword = $("input[name='confirm_password']").val();
+            return password === confirmPassword;
         }
-    }
 
-    // Listen for input changes in the password and confirm password fields
-    $("input[name='password'], input[name='confirm_password']").on('input', validatePassword);
-
-    // Initial validation
-    validatePassword();
-});
-
-
-$(document).ready(function() {
-    $('#username').on('input', function() {
-        const username = $(this).val();
-        if (username.length >= 3) {
-            $.ajax({
-                url: '{% url "check_username_availability" %}',
-                data: {'username': username},
-                method: 'GET',
-                success: function(data) {
-                    if (data.available) {
-                        $('#usernameValidationMessage').text('Username is available').css('color', 'green');
-                    } else {
-                        $('#usernameValidationMessage').text('Username is already taken').css('color', 'red');
-                    }
-                }
-            });
-        } else {
-            $('#usernameValidationMessage').text('').css('color', 'initial');
+        // Function to enable/disable the submit button based on password validation and change button color
+        function validatePassword() {
+            if (passwordsMatch() && $('#usernameValidationMessage').text() === 'Username is available') { // Check if passwords match and username is available
+                $('#submitBtn').prop('disabled', false);
+                $('#submitBtn').removeClass('bg-gray-400').addClass('bg-sky-500');
+                $("input[name='password'], input[name='confirm_password']").removeClass('error-border'); // Remove error class
+            } else {
+                $('#submitBtn').prop('disabled', true);
+                $('#submitBtn').removeClass('bg-sky-500 hover:bg-sky-700').addClass('bg-gray-400');
+                $("input[name='password'], input[name='confirm_password']").addClass('error-border'); // Add error class
+            }
         }
+
+        // Listen for input changes in the password and confirm password fields
+        $("input[name='password'], input[name='confirm_password']").on('input', validatePassword);
+
+        // Initial validation
+        validatePassword();
     });
-});
 
-
+    $(document).ready(function() {
+        $('#username').on('input', function() {
+            const username = $(this).val();
+            if (username.length >= 3) {
+                $.ajax({
+                    url: '{% url "check_username_availability" %}',
+                    data: {'username': username},
+                    method: 'GET',
+                    success: function(data) {
+                        if (data.available) {
+                            $('#usernameValidationMessage').text('Username is available').css('color', 'green');
+                        } else {
+                            $('#usernameValidationMessage').text('Username is already taken').css('color', 'red');
+                        }
+                        // Validate password after username availability check
+                        validatePassword();
+                    }
+                });
+            } else {
+                $('#usernameValidationMessage').text('').css('color', 'initial');
+                // Validate password if username length is less than 3
+                validatePassword();
+            }
+        });
+    });
 </script>
+
 
 {% endblock %}
 
