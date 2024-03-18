@@ -94,23 +94,23 @@ $(document).ready(function () {
   </style>
 </head>
 <body>
-  <nav class="py-6 px-6 md:flex md:justify-between md:items-center border-b border-gray-200">
-    <a href="/" class="text-xl font-semibold hover:text-sky-500">sellover</a>
+  <nav class="py-6 px-6 md:flex md:justify-between md:items-center bg-white shadow dark:border dark:bg-gray-800 dark:border-gray-700">
+    <a href="/" class="text-xl font-semibold hover:text-sky-500 text-white">sellover</a>
 
     <!-- Mobile menu toggle button -->
     <input type="checkbox" class="hidden md:hidden menu-toggle" id="menu-toggle">
 
     <!-- Mobile menu items -->
     <div class="menu-items md:hidden">
-      <a href="{% url 'new' %}" class="block md:inline text-lg font-semibold hover:text-skygra-500">New item</a>
-      <a href="{% url 'items' %}" class="block md:inline text-lg font-semibold hover:text-sky-500">Browse</a>
+      <a href="{% url 'new' %}" class="block md:inline text-lg font-semibold text-white hover:text-sky-500">New item</a>
+      <a href="{% url 'items' %}" class="block md:inline text-lg font-semibold text-white hover:text-sky-500">Browse</a>
       {% if request.user.is_authenticated %}
-        <a href="{% url 'conversation:inbox' %}" class="block md:inline text-lg font-semibold hover:text-sky-500">inbox</a>
-        <a href="{% url 'logout' %}" class="block md:inline text-lg font-semibold hover:text-sky-500">Logout</a>
-        <a href="{% url 'dashboard:index' %}" class="block md:inline text-lg font-semibold hover:text-sky-500">Dashboard</a>
+        <a href="{% url 'conversation:inbox' %}" class="block md:inline text-lg font-semibold :text-white hover:text-sky-500">inbox</a>
+        <a href="{% url 'logout' %}" class="block md:inline text-lg font-semibold text-white hover:text-sky-500">Logout</a>
+        <a href="{% url 'dashboard:index' %}" class="block md:inline text-lg font-semibold text-white hover:text-sky-500">Dashboard</a>
       {% else %}
-        <a href="{% url 'register_view' %}" class="block md:inline text-lg font-semibold hover:text-sky-500">Sign up</a>
-        <a href="{% url 'login' %}" class="block md:inline text-lg font-semibold hover:text-sky-500">Log in</a>
+        <a href="{% url 'register_view' %}" class="block md:inline text-lg font-semibold text-white hover:text-sky-500">Sign up</a>
+        <a href="{% url 'login' %}" class="block md:inline text-lg font-semibold text-white hover:text-sky-500">Log in</a>
       {% endif %}
     </div>
 
@@ -123,15 +123,15 @@ $(document).ready(function () {
 
     <!-- Desktop menu items -->
     <div class="hidden md:flex space-x-6">
-      <a href="{% url 'new' %}" class="text-lg font-semibold hover:text-sky-500">New item</a>
-      <a href="{% url 'items' %}" class="text-lg font-semibold hover:text-sky-500">Browse</a>
+      <a href="{% url 'new' %}" class="text-lg font-semibold text-white hover:text-sky-500">New item</a>
+      <a href="{% url 'items' %}" class="text-lg font-semibold text-white hover:text-sky-500">Browse</a>
       {% if request.user.is_authenticated %}
-        <a href="{% url 'conversation:inbox' %}" class="text-lg font-semibold hover:text-sky-500">inbox</a>
-        <a href="{% url 'logout' %}" class="text-lg font-semibold hover:text-sky-500">Logout</a>
-        <a href="{% url 'dashboard:index' %}" class="text-lg font-semibold hover:text-sky-500">Dashboard</a>
+        <a href="{% url 'conversation:inbox' %}" class="text-lg font-semibold text-white hover:text-sky-500">inbox</a>
+        <a href="{% url 'logout' %}" class="text-lg font-semibold text-white hover:text-sky-500">Logout</a>
+        <a href="{% url 'dashboard:index' %}" class="text-lg font-semibold text-white hover:text-sky-500">Dashboard</a>
       {% else %}
-        <a href="{% url 'register_view' %}" class="text-lg font-semibold hover:text-sky-500">Sign up</a>
-        <a href="{% url 'login' %}" class="text-lg font-semibold hover:text-sky-500">Log in</a>
+        <a href="{% url 'register_view' %}" class="text-lg font-semibold text-white hover:text-sky-500">Sign up</a>
+        <a href="{% url 'login' %}" class="text-lg font-semibold text-white hover:text-sky-500">Log in</a>
       {% endif %}
     </div>
   </nav>
