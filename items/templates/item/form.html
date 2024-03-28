@@ -3,28 +3,41 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<div class="w-full md:w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
+<div class="w-full md:w-1/2 my-6 mx-auto dark:bg-gray-800 bg-white rounded-lg shadow dark:border dark:border-gray-700">
+    <div class="p-6">
+        <h1 class="mb-6 text-3xl">{{ title }}</h1>
 
-<h1 class="mb-6 text-3xl">{{ title }}</h1>
+        <form method="post" action="." enctype="multipart/form-data">
+            {% csrf_token %}
 
-<form method="post" action="." enctype="multipart/form-data">
-    {% csrf_token %}
+            <div class="space-y-4">
+                {% for field in form %}
+                    <div class="mb-4">
+                        {% if field.label_tag %}
+                            <label for="{{ field.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-700">{{ field.label }}</label>
+                        {% endif %}
+                        {{ field }}
+                        {% if field.help_text %}
+                            <p class="mt-2 text-xs text-gray-500">{{ field.help_text }}</p>
+                        {% endif %}
+                        {% if field.errors %}
+                            <p class="mt-2 text-sm text-red-500">{{ field.errors }}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
 
-    <div class="space-y-4">
-        {{ form.as_p }}
+            {% if form.errors or form.non_field_errors %}
+                <div class="mb-3 p-3 bg-red-100 text-red-500 rounded-lg">
+                    {% for field in form %}
+                        {{ field.errors }}
+                    {% endfor %}
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <button class="mt-6 w-full py-3 px-6 text-lg bg-blue-500 hover:bg-blue-700 rounded-lg text-white" type="submit">Submit</button>
+        </form>
     </div>
-
-    {% if form.errors or form.non_field_errors %}
-        <div class="mb-3 p-6 bg-red-100 rounded-xl">
-            {% for field in form %}
-                {{ field.errors }}
-            {% endfor %}
-
-            {{ form.non_field_errors }}
-        </div>
-    {% endif %}
-
-    <button class="mt-6 py-4 px-8 text-lg bg-sky-500 hover:bg-sky-700 rounded-xl text-white" type="submit">Submit</button>
-</form>
 </div>
 {% endblock %}
